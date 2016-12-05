@@ -16,7 +16,7 @@ function requestPlayer(player){
   }
 }
 
-function receivePlayer(player, json){
+function receivePlayer(json){
   // console.log('action creator function receivePlayer player variable:');
   // console.log(player);
   // console.log('action creator function receivePlayer json.data variable:');
@@ -35,7 +35,7 @@ function fetchPlayerInfo(player) {
     dispatch(requestPlayer(player))
     return fetch(`${ROOT_URL}/${player}?api_key=${API_KEY}`)
       .then(response => response.json())
-      .then(json => dispatch(receivePlayer(player, json)))
+      .then(json => dispatch(receivePlayer(json)))
   }
 }
 
