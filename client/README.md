@@ -1,1 +1,0 @@
-This web app has been something I have wanted to build for a long time. A way to score individual summoners you have played with. A simple thumbs up/down system with a way to comment on specific matches. This is meant to be constructive and also to warn people about potentially getting a troll on your team.
