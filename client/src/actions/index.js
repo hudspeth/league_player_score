@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
+import API_KEY from '../../config/envinfo';
 
-const API_KEY = '05e13ae8-5dc3-423e-bcc9-43b840469e48';
 const ROOT_URL = 'https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name';
 // const url = `${ROOT_URL}/${player}?api_key=${API_KEY}`;
 
