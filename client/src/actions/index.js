@@ -1,13 +1,18 @@
+// required modules and files 
 import fetch from 'isomorphic-fetch';
+
+// environment info to keep sensitive data out of repo(API_KEY)
 import envinfo from '../../config/envinfo';
 
+// Constant URLs
 const ROOT_URL = 'https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name';
 const APP_API_URL = 'http://localhost:3001/api/user';
-// const url = `${ROOT_URL}/${player}?api_key=${API_KEY}`;
 
+// Action types
 export const REQUEST_PLAYER = 'REQUEST_PLAYER';
 export const RECEIVE_PLAYER = 'RECEIVE_PLAYER';
 
+// Getting the initial player name from search bar
 function requestPlayer(player){
   // console.log('action creator function requestPlayer player variable:');
   // console.log(player);
@@ -19,6 +24,7 @@ function requestPlayer(player){
   }
 }
 
+// take JSON info for player and put into state as playerInfo
 function receivePlayer(json){
   // console.log('action creator function receivePlayer player variable:');
   // console.log(player);
@@ -31,6 +37,8 @@ function receivePlayer(json){
   }
 }
 
+// request the player using name given, create API call to Riot to get JSON data
+// Also checkDB to POST to /api/user server to create a user in the database
 function fetchPlayerInfo(player) {
   // console.log('action creator function fetchPlayerInfo player variable:');
   // console.log(player);
@@ -43,13 +51,29 @@ function fetchPlayerInfo(player) {
   }
 }
 
+// sends a POST to /api/user server with summonerId and summonerName
 function checkDB(json){
   const summonerId = json.playerInfo[Object.keys(json.playerInfo)[0]].id
-  // console.log('from checkDB')
-  // console.log(json.playerInfo[Object.keys(json.playerInfo)[0]].id)
-  return fetch(`${APP_API_URL}/${summonerId}`, {mode: 'no-cors'});
+  const summonerName = json.playerInfo[Object.keys(json.playerInfo)[0]].name
+
+  var payload = {
+    id: summonerId,
+    name: summonerName
+  };
+
+  var data = new FormData();
+  data.append("json", JSON.stringify(payload));
+  fetch(`${APP_API_URL}`, 
+  {
+    mode: 'no-cors',
+    method: 'POST',
+    body: data
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data){ alert( JSON.stringify( data ) ) })
 }
 
+// main export function to dispatch information as state
 export function fetchPlayer(player){
   return (dispatch, getState) => {
     return dispatch(fetchPlayerInfo(player))
