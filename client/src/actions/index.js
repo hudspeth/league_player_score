@@ -2,7 +2,8 @@
 import fetch from 'isomorphic-fetch';
 
 // environment info to keep sensitive data out of repo(API_KEY)
-import envinfo from '../../config/envinfo';
+// change the file to use '../../config/envinfo'
+import envinfo from '../../config/envinfoMINE';
 
 // Constant URLs
 const ROOT_URL = 'https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name';
