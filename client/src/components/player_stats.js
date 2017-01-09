@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPlayer } from '../actions/index';
+import '../styles/player_stats.css';
 
 class PlayerStats extends Component {
   render(){
     const { player } = this.props;
+
     // console.log('from playerStats render method logging: this.props')
     // console.log(player);
     if (!player){
-      return <div>Waiting for Player</div>
+      return <div className='waiting-for-player'>Waiting for Player</div>
     } else {
       const playerData = player[Object.keys(player)[0]];
       return(
-        <div>
+        <div className='player-info-layout'>
           <div>ID: {playerData.id}</div>
           <div>PlayerName: {playerData.name}</div>
           <div>Level: {playerData.summonerLevel}</div>
           <div>Profile Icon: {playerData.profileIconId}</div>
+          <div>Player Rating: <input type='text' id='player-rating' defaultValue='0'/></div>
+          <button className='btn btn-secondary' onClick='incrementRating()'>Like</button>
+          <button className='btn btn-secondary' onClick='decrementRating()'>Dislike</button>
         </div>
       );
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchPlayer } from '../actions/index';
+import '../styles/search_bar.css';
 
 class SearchBar extends Component {
   // constructor for searchbar to give initial state
@@ -31,17 +32,19 @@ class SearchBar extends Component {
 
   render(){
     return (
-      <form onSubmit={this.onFormSubmit} className='input-group'>
-        <input
-          placeholder='Enter Summoner Name'
-          className='form-control'
-          value={this.state.term}
-          onChange={this.onInputChange}
-        />
-        <span className='input-group-btn'>
-          <button type='submit' className='btn btn-secondary'>Submit</button>
-        </span>
-      </form>
+      <div className='search-form'>
+        <form onSubmit={this.onFormSubmit} className='input-group'>
+          <input
+            placeholder='Enter Summoner Name'
+            className='form-control'
+            value={this.state.term}
+            onChange={this.onInputChange}
+          />
+          <span className='input-group-btn'>
+            <button type='submit' className='btn btn-secondary'>Submit</button>
+          </span>
+        </form>
+      </div>
     );
   }
 }
